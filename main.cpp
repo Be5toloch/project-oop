@@ -51,7 +51,36 @@ public:
     }
 };
 
+void runTests() {
+
+    {
+        SmallFireFighter firefighter;
+        firefighter.setAddress("123 Test St");
+        firefighter.fightFire();
+        firefighter.chooseEquipment();
+    }
+
+    {
+        MediumFireFighter firefighter;
+        firefighter.setAddress("456 Test St");
+        firefighter.fightFire();
+        firefighter.chooseEquipment();
+    }
+
+    {
+        LargeFireFighter firefighter;
+        firefighter.setAddress("789 Test St");
+        firefighter.fightFire();
+        firefighter.chooseEquipment();
+    }
+
+    cout << "All tests passed!" << endl;
+}
+
+
 int main() {
+
+    runTests();
 
     vector<FireFighter*> firefighters;
     firefighters.push_back(new SmallFireFighter());
