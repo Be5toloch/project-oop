@@ -50,3 +50,53 @@ public:
         cout << "Choosing foam extinguisher and fire hose for large fire." << endl;
     }
 };
+
+int main() {
+
+    vector<FireFighter*> firefighters;
+    firefighters.push_back(new SmallFireFighter());
+    firefighters.push_back(new MediumFireFighter());
+    firefighters.push_back(new LargeFireFighter());
+
+    string address;
+    int fireLevel;
+    char continueInput;
+
+    do {
+        cout << "Enter the address of the fire: ";
+        cin.ignore();
+        getline(cin, address);
+
+        cout << "Enter the fire level (1 for small, 2 for medium, 3 for large): ";
+        cin >> fireLevel;
+
+        FireFighter* firefighter = nullptr;
+
+        switch (fireLevel) {
+            case 1:
+                firefighter = new SmallFireFighter();
+            break;
+            case 2:
+                firefighter = new MediumFireFighter();
+            break;
+            case 3:
+                firefighter = new LargeFireFighter();
+            break;
+            default:
+                cout << "Invalid fire level entered." << endl;
+            continue;
+        }
+
+        firefighter->setAddress(address);
+        firefighter->chooseEquipment();
+        firefighter->fightFire();
+
+        delete firefighter;
+
+        cout << "Do you want to enter another fire? (y/n): ";
+        cin >> continueInput;
+
+    } while (continueInput == 'y');
+
+    return 0;
+}
