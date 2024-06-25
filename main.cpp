@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cassert>
 
 using namespace std;
 
@@ -13,73 +14,70 @@ public:
         address = addr;
     }
 
-    virtual void fightFire() = 0;
-    virtual void chooseEquipment() = 0;
+    virtual string fightFire() = 0;
+    virtual string chooseEquipment() = 0;
     virtual ~FireFighter() {}
 };
 
 class SmallFireFighter : public FireFighter {
 public:
-    void fightFire() override {
-        cout << "Small fire at " << address << ". Using water extinguisher." << endl;
+    string fightFire() override {
+        return "Small fire at " + address + ". Using water extinguisher.";
     }
 
-    void chooseEquipment() override {
-        cout << "Choosing water extinguisher and fire blanket for small fire." << endl;
+    string chooseEquipment() override {
+        return "Choosing water extinguisher and fire blanket for small fire.";
     }
 };
 
 class MediumFireFighter : public FireFighter {
 public:
-    void fightFire() override {
-        cout << "Medium fire at " << address << ". Using CO2 extinguisher." << endl;
+    string fightFire() override {
+        return "Medium fire at " + address + ". Using CO2 extinguisher.";
     }
 
-    void chooseEquipment() override {
-        cout << "Choosing CO2 extinguisher and protective gear for medium fire." << endl;
+    string chooseEquipment() override {
+        return "Choosing CO2 extinguisher and protective gear for medium fire.";
     }
 };
 
 class LargeFireFighter : public FireFighter {
 public:
-    void fightFire() override {
-        cout << "Large fire at " << address << ". Using foam extinguisher and fire hose." << endl;
+    string fightFire() override {
+        return "Large fire at " + address + ". Using foam extinguisher and fire hose.";
     }
 
-    void chooseEquipment() override {
-        cout << "Choosing foam extinguisher and fire hose for large fire." << endl;
+    string chooseEquipment() override {
+        return "Choosing foam extinguisher and fire hose for large fire.";
     }
 };
 
 void runTests() {
-
     {
         SmallFireFighter firefighter;
-        firefighter.setAddress("123 Test St");
-        firefighter.fightFire();
-        firefighter.chooseEquipment();
+        firefighter.setAddress("1 Test St");
+        assert(firefighter.fightFire() == "Small fire at 1 Test St. Using water extinguisher.");
+        assert(firefighter.chooseEquipment() == "Choosing water extinguisher and fire blanket for small fire.");
     }
 
     {
         MediumFireFighter firefighter;
-        firefighter.setAddress("456 Test St");
-        firefighter.fightFire();
-        firefighter.chooseEquipment();
+        firefighter.setAddress("2 Test St");
+        assert(firefighter.fightFire() == "Medium fire at 2 Test St. Using CO2 extinguisher.");
+        assert(firefighter.chooseEquipment() == "Choosing CO2 extinguisher and protective gear for medium fire.");
     }
 
     {
         LargeFireFighter firefighter;
-        firefighter.setAddress("789 Test St");
-        firefighter.fightFire();
-        firefighter.chooseEquipment();
+        firefighter.setAddress("3 Test St");
+        assert(firefighter.fightFire() == "Large fire at 3 Test St. Using foam extinguisher and fire hose.");
+        assert(firefighter.chooseEquipment() == "Choosing foam extinguisher and fire hose for large fire.");
     }
 
     cout << "All tests passed!" << endl;
 }
 
-
 int main() {
-
     runTests();
 
     vector<FireFighter*> firefighters;
@@ -117,8 +115,8 @@ int main() {
         }
 
         firefighter->setAddress(address);
-        firefighter->chooseEquipment();
-        firefighter->fightFire();
+        cout << firefighter->chooseEquipment() << endl;
+        cout << firefighter->fightFire() << endl;
 
         delete firefighter;
 
