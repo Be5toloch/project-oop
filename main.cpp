@@ -104,16 +104,16 @@ int main() {
         switch (fireLevel) {
             case 1:
                 firefighter = new SmallFireFighter();
-            break;
+                break;
             case 2:
                 firefighter = new MediumFireFighter();
-            break;
+                break;
             case 3:
                 firefighter = new LargeFireFighter();
-            break;
+                break;
             default:
                 cout << "Invalid fire level entered." << endl;
-            continue;
+                continue;
         }
 
         firefighter->setAddress(address);
